@@ -1,0 +1,143 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --container-bg-color: #f8f8fa;
+  --bg-primary-color: #ffffff;
+  --bg-secondary-color: #fafafc;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --font-color: #333;
+  --font-color-2: rgb(78, 89, 105);
+  --box-shadow: rgba(50, 50, 93, 0.25) 0 2px 5px -1px,
+  rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+:root.dark {
+  --container-bg-color: #1e1e22;
+  --bg-primary-color: #141414;
+  --bg-secondary-color: #2b2b2f;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --font-color: #ffffff;
+  --font-color-2: rgba(255, 255, 255, .7);
+  --box-shadow: rgba(200, 200, 200, 0.5) 0 2px 2px -6px,
+  rgba(150, 150, 150, 0.7) 0px 1px 3px -1px;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  color: var(--font-color);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+}
+
+
+/*设置滚动条宽度为 6px*/
+::-webkit-scrollbar {
+  width: 2px;
+  height: 5px;
+}
+
+/*设置背景颜色，并设置边框倒角，设置滚动动画，0.2 */
+::-webkit-scrollbar-thumb {
+  background-color: #0003;
+  border-radius: 10px;
+  transition: all .2s ease-in-out;
+}
+
+/*设置滚动框为倒角*/
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+
+.el-menu .el-sub-menu .el-sub-menu__title {
+  font-size: 14px;
+  height: 40px;
+}
+
+.el-menu .el-sub-menu .el-sub-menu__title:hover {
+  color: rgba(81, 154, 115, 0.6) !important;
+  background-color: rgba(234, 239, 255, 1) !important;
+}
+
+.el-menu .el-sub-menu .el-menu-item {
+  font-size: 14px;
+  height: 40px;
+
+  &:hover {
+    color: rgba(81, 154, 115, 0.6) !important;
+    background-color: rgba(234, 239, 255, 1) !important;
+  }
+
+  &.is-active {
+    color: #519a73 !important;
+    background-color: #edf5f1 !important;
+  }
+}
+
+.el-menu--collapse {
+  .is-active {
+    .el-sub-menu__title {
+      color: #519a73 !important;
+      background-color: #edf5f1 !important;
+    }
+  }
+}
+
+.el-menu .el-menu-item {
+  font-size: 14px;
+  height: 40px;
+
+  &:hover {
+    color: rgba(81, 154, 115, 0.6) !important;
+    background-color: rgba(234, 239, 255, 1) !important;
+  }
+
+  &.is-active {
+    color: #519a73 !important;
+    background-color: #edf5f1 !important;
+  }
+}
+
+
+.el-menu {
+  border-right: 0 !important;
+  width: 100% !important;
+  background-color: var(--bg-primary-color);
+  color: var(--font-color);
+  height: 100% !important;
+}
+
+.el-dropdown {
+  height: 100%;
+}
