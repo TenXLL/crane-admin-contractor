@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia';
+import { MenuTree, SelfInfoDTO } from '@/share/types/header.types.ts';
 
 const useUserStore = defineStore(
   'user',
   () => {
-    const userInfo = ref<any>();
+    const userInfo = ref<SelfInfoDTO>(<SelfInfoDTO>{});
     const token = ref<string>('');
-    const menu = ref<any[]>([]);
+    const menu = ref<MenuTree[]>([]);
     const roles = ref<string[]>([]);
     const perms = ref<string[]>([]);
     const paths = ref<string[]>([]);
@@ -16,6 +17,10 @@ const useUserStore = defineStore(
 
     const setToken = (data: string) => {
       token.value = data;
+    };
+
+    const setMenu = (data: MenuTree[]) => {
+      menu.value = data;
     };
 
     const setRoles = (data: string[]) => {
@@ -30,10 +35,6 @@ const useUserStore = defineStore(
       paths.value = data;
     };
 
-    const logout = () => {
-      window.localStorage.removeItem('user');
-    };
-
     return {
       userInfo,
       token,
@@ -43,10 +44,10 @@ const useUserStore = defineStore(
       paths,
       setUserInfo,
       setToken,
+      setMenu,
       setRoles,
       setPerms,
-      setPaths,
-      logout
+      setPaths
     };
   },
   {

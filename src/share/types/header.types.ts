@@ -8,7 +8,7 @@ export interface MenuTree {
   gmtCreate?: string;
   gmtModified?: string;
   icon?: string;
-  id?: string;
+  id: string;
   title: string;
   orderNumber?: number;
   path: string;

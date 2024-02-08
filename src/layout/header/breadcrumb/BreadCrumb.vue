@@ -19,11 +19,7 @@ onMounted(() => {
 
 <template>
   <el-breadcrumb :separator-icon="ArrowRight">
-    <el-breadcrumb-item
-      v-for="(item, index) in breadcrumbList"
-      :key="index"
-      :to="item.path"
-    >
+    <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="index">
       <div class="flex items-center gap-1">
         <ElIconFormat v-if="item.icon" :name="item.icon" />
         {{ item.title }}

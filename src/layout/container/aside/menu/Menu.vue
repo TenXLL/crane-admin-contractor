@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { MenuTree } from '@/share/types/header.types.ts';
 import router from '@/router';
-import { menuExample } from '@/layout/container/aside/menu/menu.example.ts';
+import useUserStore from '@/store/modules/user.store.ts';
+import useRouterStore from '@/store/modules/router.store.ts';
 
 const treeData = ref<MenuTree[]>([]);
 
@@ -12,12 +13,23 @@ defineProps({
   }
 });
 
+watch(
+  () => useUserStore().menu,
+  (newValue) => {
+    treeData.value = newValue;
+  }
+);
+
 onMounted(() => {
-  treeData.value = menuExample;
+  initMenu();
 });
 
-const handleOpen = (path: string, pathNode: any) => {
+const handleOpen = (path: string) => {
   router.push(path);
+};
+
+const initMenu = () => {
+  treeData.value = useUserStore().menu;
 };
 </script>
 
@@ -26,7 +38,11 @@ const handleOpen = (path: string, pathNode: any) => {
     active-text-color="#ffd04b"
     class="el-menu-vertical-demo"
     :collapse-transition="false"
-    default-active="2"
+    :default-active="
+      useRouterStore().routerList?.find((i) => {
+        return i.active;
+      })?.path
+    "
     :collapse="isCollapse"
     @select="handleOpen"
   >

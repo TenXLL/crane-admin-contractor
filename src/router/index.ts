@@ -12,7 +12,7 @@ import { setRouterList } from '@/router/router.tag.ts';
 export const constantRoutes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/login'
   },
   {
     path: '/:pathMatch(.*)*',
@@ -71,6 +71,72 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import('@/pages/home/Home.vue')
       }
     ]
+  },
+  {
+    path: '/login',
+    name: '登录',
+    meta: {
+      title: '登录'
+    },
+    component: () => import('@/pages/login/Login.vue')
+  },
+  {
+    path: '/setting',
+    name: '系统设置',
+    meta: {
+      title: '系统设置'
+    },
+    component: () => import('@/layout/Layout.vue'),
+    children: [
+      {
+        path: '/setting/user',
+        name: '用户管理',
+        meta: {
+          title: '用户管理'
+        },
+        component: () => import('@/pages/setting/user/User.vue')
+      },
+      {
+        path: '/setting/role',
+        name: '角色管理',
+        meta: {
+          title: '角色管理'
+        },
+        component: () => import('@/pages/setting/role/Role.vue')
+      },
+      {
+        path: '/setting/menu',
+        name: '菜单管理',
+        meta: {
+          title: '菜单管理'
+        },
+        component: () => import('@/pages/setting/menu/Menu.vue')
+      },
+      {
+        path: '/setting/org',
+        name: '组织机构管理',
+        meta: {
+          title: '组织机构管理'
+        },
+        component: () => import('@/pages/setting/org/Org.vue')
+      },
+      {
+        path: '/setting/dict',
+        name: '字典管理',
+        meta: {
+          title: '字典管理'
+        },
+        component: () => import('@/pages/setting/dict/Dict.vue')
+      },
+      {
+        path: '/setting/config',
+        name: '全局配置管理',
+        meta: {
+          title: '全局配置管理'
+        },
+        component: () => import('@/pages/setting/config/Config.vue')
+      }
+    ]
   }
 ];
 
@@ -98,10 +164,15 @@ router.beforeEach((_to: any, _from: any, next: any) => {
 // 后置路由
 router.afterEach(
   (
-    _to: RouteLocationNormalized,
+    to: RouteLocationNormalized,
     _from: RouteLocationNormalized,
     _failure?: NavigationFailure | void
   ) => {
+    if (to.meta.title) {
+      document.title = `${document.title.split('-')[0]} - ${
+        to.meta.title as string
+      }`;
+    }
     // 关闭掉进度条
     NProgress.done();
   }

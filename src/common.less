@@ -8,6 +8,8 @@
   --font-color-2: rgb(78, 89, 105);
   --box-shadow: rgba(50, 50, 93, 0.25) 0 2px 5px -1px,
   rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  --line-color: rgba(0, 0, 0, 0.1);
+  --hover-color: rgb(222, 227, 241);
 }
 
 :root.dark {
@@ -19,6 +21,8 @@
   --font-color-2: rgba(255, 255, 255, .7);
   --box-shadow: rgba(200, 200, 200, 0.5) 0 2px 2px -6px,
   rgba(150, 150, 150, 0.7) 0px 1px 3px -1px;
+  --line-color: rgba(255, 255, 255, 0.1);
+  --hover-color: rgb(197, 208, 241);
 }
 
 a {
@@ -141,3 +145,30 @@ h1 {
 .el-dropdown {
   height: 100%;
 }
+
+.el-input {
+  width: 100% !important;
+}
+
+
+.el-input-number {
+  width: 100% !important;
+}
+
+.crane-page {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.demo-form-inline .el-input {
+  --el-input-width: 220px;
+}
+
+.demo-form-inline .el-select {
+  --el-select-width: 220px;
+}
+

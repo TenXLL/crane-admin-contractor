@@ -8,7 +8,7 @@
     </div>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item>用户详情</el-dropdown-item>
+        <el-dropdown-item @click="userDetail">用户详情</el-dropdown-item>
         <el-dropdown-item divided @click="logout">退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </template>
@@ -17,8 +17,14 @@
 
 <script setup lang="ts">
 import { PropType } from 'vue';
+import { useDialog } from 'crane-element';
 import router from '@/router';
 import { SelfInfoDTO } from '@/share/types/header.types.ts';
+import { _logout } from '@/pages/login/login.service.ts';
+import { ResponseCode } from '@/share/types/request.types.ts';
+import UserInfoOperate from '@/components/user-info-operate/UserInfoOperate.vue';
+
+const { openDialog } = useDialog();
 
 defineProps({
   userInfoData: {
@@ -28,8 +34,22 @@ defineProps({
 });
 
 const logout = () => {
-  // userStore().logout();
+  _logout().then((res) => {
+    if (res.code === ResponseCode.SUCCESS) {
+      ElNotification.success('退出登录成功');
+    }
+  });
   router.push('/');
+};
+
+const userDetail = () => {
+  openDialog({
+    component: UserInfoOperate,
+    options: {
+      destroyOnClose: true
+    },
+    params: {}
+  });
 };
 </script>
 

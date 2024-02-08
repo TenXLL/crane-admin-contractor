@@ -24,9 +24,8 @@
       />
       <UserInfoAvatar
         :user-info-data="{
-          logoSrc:
-            'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-          realName: 'admin'
+          logoSrc: useUserStore().userInfo.logoSrc,
+          realName: useUserStore().userInfo.realName
         }"
       ></UserInfoAvatar>
     </div>
@@ -39,8 +38,13 @@ import UserInfoAvatar from '@/layout/header/user-info-avatar/UserInfoAvatar.vue'
 import useThemeStore from '@/store/modules/theme.store.ts';
 import { changeThem, initThem } from '@/hooks/changeColor.ts';
 import BreadCrumb from '@/layout/header/breadcrumb/BreadCrumb.vue';
+import { _totalBaseInfo } from '@/layout/header/header.service.ts';
+import { ResponseCode } from '@/share/types/request.types.ts';
+import useUserStore from '@/store/modules/user.store.ts';
+import { SelfInfoDTO } from '@/share/types/header.types.ts';
 
 const { changeThemItem } = changeThem();
+const userInfoData = ref<SelfInfoDTO>(<SelfInfoDTO>{});
 
 defineProps({
   isCollapse: {
@@ -51,7 +55,18 @@ defineProps({
 
 onMounted(() => {
   initThem();
+  getUserInfo();
 });
+
+function getUserInfo() {
+  _totalBaseInfo().then((res) => {
+    if (res.code === ResponseCode.SUCCESS) {
+      userInfoData.value = res.data.selfInfoDTO;
+      useUserStore().setUserInfo(res.data.selfInfoDTO);
+      useUserStore().setMenu(res.data.menuTree);
+    }
+  });
+}
 </script>
 
 <style scoped lang="less">

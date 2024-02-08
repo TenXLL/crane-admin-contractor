@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { Router } from '@/share/types/router.types.ts';
+import router from '@/router';
 
 const useRouterStore = defineStore(
   'router',
@@ -9,28 +10,47 @@ const useRouterStore = defineStore(
     const breadcrumbList = ref<Router[]>([]);
 
     const setRouterList = (router: Router) => {
+      router.active = true;
       const canPush = routerList.value.filter((i) => {
         return i.path === router.path;
       });
 
-      if (canPush.length > 0) return;
-
       routerList.value.forEach((i: Router) => {
         i.active = false;
       });
-      router.active = true;
-      routerList.value.push(router);
+
+      if (canPush.length > 0) {
+        routerList.value.forEach((i) => {
+          if (i.path === router.path) {
+            i.active = true;
+          }
+        });
+        return;
+      }
+
+      routerList.value = [...routerList.value, router];
     };
 
     const setBreadcrumbList = (router: Router[]) => {
       breadcrumbList.value = router;
     };
 
+    const close = (path: string) => {
+      if (routerList.value.length <= 1) {
+        return;
+      }
+      routerList.value = routerList.value.filter((i) => i.path !== path);
+      router
+        .push(routerList.value[routerList.value.length - 1].path)
+        .then(() => {});
+    };
+
     return {
       routerList,
       breadcrumbList,
       setRouterList,
-      setBreadcrumbList
+      setBreadcrumbList,
+      close
     };
   },
   {
