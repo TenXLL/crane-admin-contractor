@@ -69,7 +69,7 @@ export default defineConfig(({ command, mode }) => {
     },
     css: {
       preprocessorOptions: {
-        scss: {
+        less: {
           charset: false,
           additionalData: '@import "./src/common.less";'
         }

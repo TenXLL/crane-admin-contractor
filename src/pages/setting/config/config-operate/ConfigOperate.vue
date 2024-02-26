@@ -47,20 +47,20 @@ const schema: CraneSchema = {
         span: 12
       }
     },
-    configValue: {
-      type: 'string',
-      title: '配置值',
-      ui: {
-        placeholder: '请输入配置值',
-        span: 12
-      }
-    },
     description: {
       type: 'string',
       title: '描述',
       ui: {
         placeholder: '请输入描述',
         span: 12
+      }
+    },
+    configValue: {
+      type: 'string',
+      title: '配置值',
+      ui: {
+        placeholder: '请输入配置值',
+        span: 24
       }
     }
   },
