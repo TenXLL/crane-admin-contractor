@@ -1,4 +1,4 @@
-// src/router/index.ts
+// src/router/index.js
 import {
   createRouter,
   createWebHashHistory,
@@ -127,6 +127,14 @@ export const constantRoutes: RouteRecordRaw[] = [
           title: '字典管理'
         },
         component: () => import('@/pages/setting/dict/Dict.vue')
+      },
+      {
+        path: '/setting/bpmn',
+        name: '流程管理',
+        meta: {
+          title: '流程管理'
+        },
+        component: () => import('@/pages/setting/bpmn/Bpmn.vue')
       },
       {
         path: '/setting/config',

@@ -37,7 +37,10 @@
           </el-input>
         </el-form-item>
         <el-form-item prop="code">
-          <CodeInput v-model:modelValue="formData.code"></CodeInput>
+          <CodeInput
+            ref="codeInputRef"
+            v-model:modelValue="formData.code"
+          ></CodeInput>
         </el-form-item>
         <!--        <el-form-item label="">-->
         <!--          <el-checkbox label="记住密码" name="type" />-->
@@ -67,6 +70,7 @@ import { _login } from '@/pages/login/login.service.ts';
 import { ResponseCode } from '@/share/types/request.types.ts';
 import useUserStore from '@/store/modules/user.store.ts';
 
+const codeInputRef = ref<InstanceType<typeof CodeInput>>();
 const isLoading = ref(false);
 // 表单
 const formDataRef = ref();
@@ -113,6 +117,7 @@ const login = async (formEl: FormInstance | undefined) => {
           router.push('/home');
         } else {
           ElMessage.error(res.msg || '登录失败');
+          codeInputRef.value?.reload();
         }
         isLoading.value = false;
       });

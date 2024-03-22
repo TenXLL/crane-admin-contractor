@@ -96,6 +96,9 @@
     "vue/no-dupe-keys": "off",
     "prefer-destructuring": "off",
     "no-undef": "off",
-    "func-names": "off"
+    "func-names": "off",
+    "no-dupe-keys": "off",
+    "no-template-curly-in-string": "off",
+    "import/no-duplicates": "off"
   }
 }

@@ -76,6 +76,10 @@ function blobToBase64(blob: Blob): Promise<string> {
 function input(value: string) {
   emit('update:modelValue', value);
 }
+
+defineExpose({
+  reload: init
+});
 </script>
 
 <style scoped lang="less">
