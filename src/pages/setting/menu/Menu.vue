@@ -103,7 +103,7 @@ const columns: CraneColumn[] = [
         h(ElDivider, { direction: 'vertical' }),
         h(
           ElButton,
-          { type: 'warning', link: true, onclick: () => add() },
+          { type: 'warning', link: true, onclick: () => add(e.data.id) },
           { default: () => '当前路径新增' }
         ),
         h(ElDivider, { direction: 'vertical' }),
@@ -175,14 +175,15 @@ const reset = (data: any) => {
   init();
 };
 
-function add() {
+function add(pid?: string) {
   openDialog({
     component: MenuOperate,
     options: {
       destroyOnClose: true
     },
     params: {
-      type: 'add'
+      type: 'add',
+      pid
     }
   }).then(() => {
     init();
